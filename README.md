@@ -1,1 +1,1 @@
-# docker-stuff
+Различные docker-compose файлы, полезные и не очень
