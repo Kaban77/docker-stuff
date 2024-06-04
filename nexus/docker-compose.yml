@@ -1,0 +1,10 @@
+version: '3.6'
+services:
+  nexus-web:
+    image: 'sonatype/nexus3:3.68.1'
+    restart: always
+    ports:
+      - '8099:8081'
+networks:
+  nexus-network:
+    name: nexus-network
