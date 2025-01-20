@@ -1,4 +1,5 @@
-version: "3.9"
+name: nexus
+
 services:
   nexus-web:
     image: 'sonatype/nexus3:3.75.0'

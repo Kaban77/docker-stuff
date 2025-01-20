@@ -1,4 +1,5 @@
-version: '3.6'
+name: gitlab
+
 services:
   gitlab-web:
     image: 'gitlab/gitlab-ce:16.8.1-ce.0'
