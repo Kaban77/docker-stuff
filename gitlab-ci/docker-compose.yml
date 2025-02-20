@@ -1,9 +1,9 @@
-name: gitlab
+#name: gitlab
 
 services:
   gitlab-web:
-    image: 'gitlab/gitlab-ce:16.8.1-ce.0'
-    restart: always
+    image: 'gitlab/gitlab-ce:17.9.0-ce.0'
+    restart: "no"
     hostname: 'gitlab.kaban77.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
@@ -17,11 +17,11 @@ services:
       - '$GITLAB_HOME/config:/etc/gitlab'
       - '$GITLAB_HOME/logs:/var/log/gitlab'
       - '$GITLAB_HOME/data:/var/opt/gitlab'
-    shm_size: '256m'
+    shm_size: '1024m'
   # RUNNER
   gitlab-runner1:
-    image: gitlab/gitlab-runner:v16.7.1
-    restart: always
+    image: gitlab/gitlab-runner:v17.9.0
+    restart: "no"
     container_name: gitlab-runner1
     hostname: gitlab-runner1
     depends_on:
