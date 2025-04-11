@@ -47,4 +47,13 @@ docker cp cert_name gitlab_runner_container_id:/etc/gitlab-runner/certs/cert_nam
 gitlab-runner register --tls-ca-file="$CERTIFICATE"
 ```
 
+В контейнере раннера отредактировать `config.toml`. Добавить:
+
+```
+[[runners]]
+  ...
+  [runners.docker]
+    ...
+    network_mode = "gitlab_default"
+```
 in progress
