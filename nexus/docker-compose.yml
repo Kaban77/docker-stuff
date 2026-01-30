@@ -2,7 +2,7 @@ name: nexus
 
 services:
   nexus-web:
-    image: 'sonatype/nexus3:3.75.0'
+    image: 'sonatype/nexus3:3.87.2'
     restart: always
     ports:
       - '8099:8081'

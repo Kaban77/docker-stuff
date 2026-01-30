@@ -2,7 +2,7 @@
 
 services:
   gitlab-web:
-    image: 'gitlab/gitlab-ce:17.9.0-ce.0'
+    image: 'gitlab/gitlab-ce:18.8.2-ce.0s'
     restart: "no"
     hostname: 'gitlab.kaban77.com'
     environment:
@@ -20,7 +20,7 @@ services:
     shm_size: '1024m'
   # RUNNER
   gitlab-runner1:
-    image: gitlab/gitlab-runner:v17.9.0
+    image: gitlab/gitlab-runner:v18.8.0
     restart: "no"
     container_name: gitlab-runner1
     hostname: gitlab-runner1
