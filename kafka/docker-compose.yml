@@ -1,31 +1,26 @@
 name: kafka
 
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.9.5
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - 22181:2181
-
   kafka:
-    image: confluentinc/cp-kafka:8.0.3
-    depends_on:
-      - zookeeper
+    image: confluentinc/cp-kafka:8.1.1
     ports:
       - 29092:29092
     hostname: kafka
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: INNER://kafka:9092,OUTER://localhost:29092
+      KAFKA_KRAFT_MODE: "true"
+      KAFKA_PROCESS_ROLES: controller,broker
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:9092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+      KAFKA_LISTENERS: INTERNAL://kafka:9092,CONTROLLER://kafka:9093,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INNER:PLAINTEXT,OUTER:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: INNER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_LOG_DIRS: /tmp/kafka-logs/
-      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka-1 -Dcom.sun.management.jmxremote.rmi.port=1099"
-      JMX_PORT: 1099
+      #KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=kafka-1 -Dcom.sun.management.jmxremote.rmi.port=1099"
+      #JMX_PORT: 1099
+      CLUSTER_ID: "Dk3OEYBSD89fcwNTJENDM0Qk"
 
   kafka-ui:
     image: provectuslabs/kafka-ui:v0.7.2
@@ -39,4 +34,3 @@ services:
       DYNAMIC_CONFIG_ENABLED: "true"
     links:
       - kafka
-      - zookeeper
