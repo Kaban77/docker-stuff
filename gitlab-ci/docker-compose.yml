@@ -2,7 +2,7 @@
 
 services:
   gitlab-web:
-    image: 'gitlab/gitlab-ce:18.8.2-ce.0s'
+    image: 'gitlab/gitlab-ce:18.8.2-ce.0'
     restart: "no"
     hostname: 'gitlab.kaban77.com'
     environment:
