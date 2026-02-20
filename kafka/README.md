@@ -11,4 +11,4 @@ http://localhost:8090/
 
 ## Подключение в приложении
 
-- bootstrap.servers - `localhost:29092`
+- bootstrap.servers - `localhost:19092`
